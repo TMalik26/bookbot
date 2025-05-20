@@ -11,15 +11,11 @@ def get_book_text (filepath):
         file_contents = text.read()
     return file_contents
 
-from stats import count_words
+from stats import count_words, analyze
 
-from stats import characters
-
-from stats import analize
-
-def do_list_of_dicts (analize):
+def do_list_of_dicts (analyze):
     empty_list = []
-    for key, value in analize.items():
+    for key, value in analyze.items():
         empty_list.append({"char": key, "num": value})
     empty_list.sort(reverse=True, key=lambda x: x["num"])
     return empty_list
@@ -31,13 +27,13 @@ def main ():
     filepath = sys.argv[1]
     book_text = get_book_text(filepath)
     print("============ BOOKBOT ============")
-    print("Analyzing book found at {filepath}")
+    print(f"Analyzing book found at {filepath}")
     print("----------- Word Count ----------")
-    print(f'Found {count_words(book_text)} total words')
+    print(f"Found {count_words(book_text)} total words")
     print("--------- Character Count -------")
-    for item in do_list_of_dicts (analize(book_text)):
+    for item in do_list_of_dicts (analyze(book_text)):
         if item["char"].isalpha():
-            print(f'{item["char"]}: {item["num"]}')
+            print(f"{item["char"]}: {item["num"]}")
     print("============= END ===============")
     
 
